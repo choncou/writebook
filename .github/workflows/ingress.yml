@@ -12,6 +12,8 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref: ingress
       - name: Remove old files
         run: |
           shopt -s extglob
