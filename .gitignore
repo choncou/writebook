@@ -1,0 +1,4 @@
+log/*.log
+storage/db/*
+storage/files/*
+tmp/*
