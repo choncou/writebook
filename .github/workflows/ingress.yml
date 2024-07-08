@@ -8,25 +8,25 @@ on:
 jobs:
   update:
     runs-on: ubuntu-latest
-      permissions:
-        contents: write
-      steps:
-        - uses: actions/checkout@v2
-        - name: Remove old files
-          run: |
-            shopt -s extglob
-            rm -rf !(|.git|.|..)
-        - name: Download and unzip Source
-          run: |
-            curl -o writebook.zip https://auth.once.com/download/${{ secrets.WRITEBOOK_PURCHASE_TOKEN }}
-            unzip -o writebook.zip
-            rm writebook.zip
-        - name: Configure git
-          run: |
-            git config --local user.email "github-actions@users.noreply.github.com"
-            git config --local user.name "GitHub Actions"
-        - name: Commit and push changes
-          run: |
-            git add .
-            git diff --staged --quiet || git commit -m "Update Writebook Source $(date +%F)"
-            git push origin ingress
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v2
+      - name: Remove old files
+        run: |
+          shopt -s extglob
+          rm -rf !(|.git|.|..)
+      - name: Download and unzip Source
+        run: |
+          curl -o writebook.zip https://auth.once.com/download/${{ secrets.WRITEBOOK_PURCHASE_TOKEN }}
+          unzip -o writebook.zip
+          rm writebook.zip
+      - name: Configure git
+        run: |
+          git config --local user.email "github-actions@users.noreply.github.com"
+          git config --local user.name "GitHub Actions"
+      - name: Commit and push changes
+        run: |
+          git add .
+          git diff --staged --quiet || git commit -m "Update Writebook Source $(date +%F)"
+          git push origin ingress
